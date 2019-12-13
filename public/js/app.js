@@ -5,8 +5,9 @@ $(document).ready(function() {
     $(document).on("click",".scrape",function(e){
         e.preventDefault();
         $.post("/scrape").then(function(data) {
-            console.log(data)
-            document.location.reload();
+            
+            //document.location.reload();
+            onload();
         })
     })
 
