@@ -1,0 +1,10 @@
+.parallax{
+    background: url("/images/news.jpg");
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+    filter: brightness(60%);  
+}
+
+.card-title{
+    padding:10px 24px;
+}

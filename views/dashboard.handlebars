@@ -1,0 +1,70 @@
+<nav>
+    <div class="nav-wrapper blue-grey">
+      <a href="#" class="brand-logo">Mongo Scraper</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+        <li><a href="/saved" id = "savedArticles">Saved Article</a></li>
+        <li><a href="/"class="btn scrape">Scrape New Articles</a></li>
+        <li><a href="#" class="btn clear">Clear Articles</a></li>
+      </ul>
+    </div>
+  </nav>
+<div id ="banner" class= "parallax-container">
+    <div class= "section no-pad-bot">
+        <div class="container">
+            <h1 class="row center white-text">
+                Mongo Scraper
+            </h1>
+            <h2 class="row center gray-text">
+                The Washington Post
+            </h2>
+        </div>
+    </div>
+    <div class="parallax"></div>
+</div>
+  {{!-- <div class="container"> --}}
+      <div class="row">
+          {{#each articles}}
+            <div class="col s12">
+                <div class="card blue-grey darken-1">
+                    <div class="card-title white-text">
+                        <p data-id={{_id}}><a href={{link}} rel="" >{{title}}</a>
+                        {{#if isSaved}}
+                            <span class ="row right"><a href="#" id="clear" class="btn">Delete Article<a>
+                            <a href="#modalNotes" id="notes" class="waves-effect waves-light btn modal-trigger">Article Notes</a>
+                            {{!-- modal for notes --}}
+                            <div id="modalNotes" class="modal" data-id={{_id}}>
+                                <div class="modal-content black-text">
+                                    <h4>Notes for article : {{_id}}</h4><hr>
+                                    {{!-- {{>notes}} --}}
+                                    <ul id="savedNotes"></ul>
+                                    <textarea type="text" id ="newNote"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#!" class="modal-close waves-effect waves-green btn saveNotes">Save Note</a>
+                                </div>
+                                
+                            </div></span>
+                        {{else}}
+                            <a href="#" id = "saveArticle" class=" btn right">Save Article</a>
+                        {{/if}} 
+                        </p>   
+                    </div>
+                    
+                    <div class="card-content white-text">
+                        {{content}}
+                    </div>
+                    
+                </div>
+            </div>
+        {{/each}}
+      </div>
+    
+  
+  <footer class="page-footer blue-grey">
+      <div class="footer-copyright">
+            <div class="container ">
+                <h5 class="center">The Washington PostScraper</h5>
+            </div>
+          </div>
+  </footer>
