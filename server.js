@@ -7,9 +7,9 @@ const mongoose = require('mongoose');
 const axios = require("axios");
 var logger = require("morgan");
 
-// var MONGODB_URI = "mongodb://localhost/mHeadlines";
-// mongoose.Promise = Promise;
-// mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 var app = express();
 
 var db = require("./models");
@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-mongoose.connect("mongodb://localhost/mongoScrapping", { useNewUrlParser: true });
+//mongoose.connect("mongodb://localhost/mongoScrapping", { useNewUrlParser: true });
 
 app.engine("handlebars", handlebars({ defaultLayout: "main" }));
 app.set("view engine","handlebars");
