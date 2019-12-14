@@ -97,7 +97,9 @@ $(document).on("click",".saveNotes",function(e){
 
 $(document).on("click",".noteDelete",function(){
     let id = $(this).parent().attr("data-id");
-    $.ajax("/deletNote/"+id,{
+    let articleId = $(this).parent().parent().attr("data-id");
+    
+    $.ajax("/deletNote/"+id+"/"+articleId,{
         method:'DELETE'
     }).then(function(result){
         console.log("note deleted")

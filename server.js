@@ -56,7 +56,7 @@ app.post("/scrape", function(req, res) {
                 };
             
                 db.Article.create(result).then(function (dbResult) {
-                    data.push(dbResult);
+                    console.log(dbResult);
                 }).catch(function(err){
                     throw err
                 })
@@ -64,7 +64,7 @@ app.post("/scrape", function(req, res) {
             }
         });
 
-        res.json(data)
+        res.send(data)
     });
     
   });
@@ -95,9 +95,12 @@ app.post("/scrape", function(req, res) {
 
   })
 
-  app.delete("/deletNote/:id",function(req,res){
-      db.Note.remove({_id:req.params.id}).then(function(result){
-            res.send(result)
+  app.delete("/deletNote/:id/:articleid",function(req,res){
+
+     db.Note.deleteOne({_id:req.params.id}).then(function(result){
+        //db.articles.update({'_id': ObjectId('5df442ffc1970bb57c55d189')}, {$pull:{'notes':ObjectId('5df4559bb3d099ba4b2029f4')}})
+            return db.Article.update({_id:req.params.articleid},{$pull:{'notes':req.params.id}})
+            
       }).catch(function(err){
         res.send(err)
     })
