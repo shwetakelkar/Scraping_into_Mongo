@@ -21,11 +21,11 @@ var ArticleSchema = new Schema({
     default:false
   },
 //Note ref to Note collection
-  note: {
+  notes:[ {
     type: Schema.Types.ObjectId,
     ref: "Note"
 
-  }
+  }]
 });
 
 var Article = mongoose.model("Article", ArticleSchema);

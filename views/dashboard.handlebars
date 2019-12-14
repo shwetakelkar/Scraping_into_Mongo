@@ -3,7 +3,7 @@
       <a href="#" class="brand-logo">Mongo Scraper</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/">Home</a></li>
-        <li><a href="/saved" id = "savedArticles">Saved Article</a></li>
+        <li><a href="/saved" id ="savedArticles">Saved Article</a></li>
         <li><a href="/"class="btn scrape">Scrape New Articles</a></li>
         <li><a href="#" class="btn clear">Clear Articles</a></li>
       </ul>
@@ -30,21 +30,10 @@
                     <div class="card-title white-text">
                         <p data-id={{_id}}><a href={{link}} rel="" >{{title}}</a>
                         {{#if isSaved}}
-                            <span class ="row right"><a href="#" id="clear" class="btn">Delete Article<a>
+                            <span class ="row right"><a href="#" id="clearSavedArt" class="btn">Delete Saved Article<a>
                             <a href="#modalNotes" id="notes" class="waves-effect waves-light btn modal-trigger">Article Notes</a>
                             {{!-- modal for notes --}}
-                            <div id="modalNotes" class="modal" data-id={{_id}}>
-                                <div class="modal-content black-text">
-                                    <h4>Notes for article : {{_id}}</h4><hr>
-                                    {{!-- {{>notes}} --}}
-                                    <ul id="savedNotes"></ul>
-                                    <textarea type="text" id ="newNote"></textarea>
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="#!" class="modal-close waves-effect waves-green btn saveNotes">Save Note</a>
-                                </div>
-                                
-                            </div></span>
+                            </span>
                         {{else}}
                             <a href="#" id = "saveArticle" class=" btn right">Save Article</a>
                         {{/if}} 
@@ -68,3 +57,12 @@
             </div>
           </div>
   </footer>
+  <div id="modalNotes" class="modal">
+    <div class="modal-content black-text"></div>
+        
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn">close</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn saveNotes">Save Note</a>
+    </div>
+    
+</div>

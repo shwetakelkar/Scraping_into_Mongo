@@ -75,58 +75,82 @@ app.post("/scrape", function(req, res) {
       
         res.render("dashboard",{articles:result})
       
+    }).catch(function(err){
+        res.send(err)
     })
+
     
   });
 
   app.delete("/clear",function(req,res){
-      console.log("inside the clear")
+      
     db.Article.remove().populate("note").then(function(result){
       
         console.log(result)
         res.render("dashboard",{articles:""})
       
+    }).catch(function(err){
+        res.send(err)
     })
 
   })
 
   app.delete("/deletNote/:id",function(req,res){
       db.Note.remove({_id:req.params.id}).then(function(result){
-          console.log(result)
-      })
+            res.send(result)
+      }).catch(function(err){
+        res.send(err)
+    })
 
+  })
+
+  app.delete("/deleteSavedArticle/:id",function(req,res){
+      
+      db.Article.deleteOne({_id:req.params.id}).populate("note").then(function(result){
+        
+        res.json(result)
+      }).catch(function(err){
+          res.send(err)
+      })
   })
 
   app.put("/saved/:id",function(req,res){
      db.Article.findOneAndUpdate({_id:req.params.id}, { $set: { isSaved : true} }, { new: true }).then(function(result){
          res.json(result)
-     })
+     }).catch(function(err){
+        res.send(err)
+    })
   })
 
-  app.get("/saved", function(req, res) {
+  app.get("/savedArticle", function(req, res) {
 
-    db.Article.find({isSaved:true}).populate("note").then(function(result){
+    db.Article.find({isSaved:true}).then(function(result){
       
         return res.render("dashboard",{articles:result})
       
+    }).catch(function(err){
+        res.send(err)
     })
     
   });
   app.get("/notes/:id", function(req, res) {
 
 
-    db.Article.find({_id:req.params.id}).populate("note").then(function(result){
+    db.Article.find({_id:req.params.id}).populate("notes").then(function(result){
       
         console.log(result)
         return res.json(result)
       
+    }).catch(function(err){
+        res.send(err)
     })
 })
 
   app.post("/noteAdded/:id",function(req,res){
+    
     db.Note.create(req.body).then(function(result){
     
-        return db.Article.findOneAndUpdate({_id:req.params.id}, { $push: { note: result._id } }, { new: true })
+        return db.Article.findOneAndUpdate({_id:req.params.id}, { $push: { notes: result._id } }, { new: true })
      
    }).catch(function(err){
      throw err

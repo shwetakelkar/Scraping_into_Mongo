@@ -8,3 +8,7 @@
 .card-title{
     padding:10px 24px;
 }
+
+.modal {
+    overflow-y:auto;
+  }
